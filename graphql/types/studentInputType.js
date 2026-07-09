@@ -18,19 +18,19 @@ const StudentInputType = new GraphQLInputObjectType({
             type: new GraphQLNonNull(GraphQLString),
         },
         gender: {
-            type: GraphQLString,
+            type: new GraphQLNonNull(GraphQLString),
         },
         department: {
-            type: GraphQLString,
+            type: new GraphQLNonNull(GraphQLString),
         },
         level: {
-            type: GraphQLInt,
+            type: new GraphQLNonNull(GraphQLInt),
         },
         age: {
-            type: GraphQLInt,
+            type: new GraphQLNonNull(GraphQLInt),
         },
         matricNumber: {
-            type: GraphQLString,
+            type: new GraphQLNonNull(GraphQLString),
         },
     },
 });

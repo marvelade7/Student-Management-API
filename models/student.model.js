@@ -44,10 +44,6 @@ const studentSchema = new mongoose.Schema(
             ref: "Department",
             required: true,
         },
-        faculty: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Faculty",
-        },
         level: {
             type: Number,
             enum: [100, 200, 300, 400, 500],
