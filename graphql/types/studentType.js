@@ -1,7 +1,6 @@
 const graphql = require("graphql");
 const Student = require("../../models/student.model");
 
-
 const {
     GraphQLInt,
     GraphQLString,
@@ -18,6 +17,10 @@ const studentType = new GraphQLObjectType({
         firstName: { type: GraphQLString },
         lastName: { type: GraphQLString },
         email: { type: GraphQLString },
+        gender: { type: GraphQLString },
+        department: { type: GraphQLString },
+        level: { type: GraphQLInt },
+        age: {type: GraphQLInt}
     },
 });
 

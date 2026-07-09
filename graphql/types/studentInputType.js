@@ -2,6 +2,7 @@ const {
     GraphQLInputObjectType,
     GraphQLString,
     GraphQLNonNull,
+    GraphQLInt,
 } = require("graphql");
 
 const StudentInputType = new GraphQLInputObjectType({
@@ -15,6 +16,21 @@ const StudentInputType = new GraphQLInputObjectType({
         },
         email: {
             type: new GraphQLNonNull(GraphQLString),
+        },
+        gender: {
+            type: GraphQLString,
+        },
+        department: {
+            type: GraphQLString,
+        },
+        level: {
+            type: GraphQLInt,
+        },
+        age: {
+            type: GraphQLInt,
+        },
+        matricNumber: {
+            type: GraphQLString,
         },
     },
 });
@@ -32,6 +48,18 @@ const StudentUpdateInput = new GraphQLInputObjectType({
             type: GraphQLString,
         },
         gender: {
+            type: GraphQLString,
+        },
+        department: {
+            type: GraphQLString,
+        },
+        level: {
+            type: GraphQLInt,
+        },
+        age: {
+            type: GraphQLInt,
+        },
+        matricNumber: {
             type: GraphQLString,
         },
     },
