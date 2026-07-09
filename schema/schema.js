@@ -9,7 +9,8 @@ const studentType = new GraphQLObjectType({
     name: "studentModel",
     fields: {
         id: { type: GraphQLID },
-        name: { type: GraphQLString },
+        firstName: { type: GraphQLString },
+        lastName: { type: GraphQLString },
         email: { type: GraphQLString },
     },
 });
@@ -23,8 +24,8 @@ const RootQuery = new GraphQLObjectType({
                 id: { type: GraphQLID },
             },
             resolve(parent, args) {
-                // console.log(args);
-                return Student.findOne({ id: args._id });
+                console.log(args);
+                return Student.findById({ _id: args.id });
             },
         },
         students: {
@@ -42,17 +43,18 @@ const RootMutation = new GraphQLObjectType({
         createStudent: {
             type: studentType,
             args: {
-                name: { type: new GraphQLNonNull(GraphQLString) },
+                firstName: { type: new GraphQLNonNull(GraphQLString) },
+                lastName: { type: new GraphQLNonNull(GraphQLString) },
                 email: { type: new GraphQLNonNull(GraphQLString) },
             },
             resolve(parent, args) {
                 return Student.create({
-                    name: args.name,
+                    firstName: args.firstName,
+                    lastName: args.lastName,
                     email: args.email,
                 })
                     .then((student) => {
                         console.log("Student created successfully");
-                        return student;
                     })
                     .catch((err) => {
                         console.log("Error", err);
