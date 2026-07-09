@@ -1,6 +1,10 @@
 const graphql = require("graphql");
 const Student = require("../../models/student.model");
 const studentType = require("../types/studentType");
+const {
+    studentInputType,
+    StudentUpdateInput,
+} = require("../types/studentInputType");
 
 const {
     GraphQLInt,
@@ -17,15 +21,20 @@ const RootMutation = new GraphQLObjectType({
         createStudent: {
             type: studentType,
             args: {
-                firstName: { type: new GraphQLNonNull(GraphQLString) },
-                lastName: { type: new GraphQLNonNull(GraphQLString) },
-                email: { type: new GraphQLNonNull(GraphQLString) },
+                // firstName: { type: new GraphQLNonNull(GraphQLString) },
+                // lastName: { type: new GraphQLNonNull(GraphQLString) },
+                // email: { type: new GraphQLNonNull(GraphQLString) },
+
+                input: {
+                    type: studentInputType,
+                },
             },
             resolve(parent, args) {
                 return Student.create({
-                    firstName: args.firstName,
-                    lastName: args.lastName,
-                    email: args.email,
+                    firstName: args.input.firstName,
+                    lastName: args.input.lastName,
+                    email: args.input.email,
+                    gender: args.input.gender,
                 })
                     .then((student) => {
                         console.log("Student created successfully");
@@ -58,17 +67,21 @@ const RootMutation = new GraphQLObjectType({
             type: studentType,
             args: {
                 id: { type: GraphQLID },
-                firstName: { type: GraphQLString },
-                lastName: { type: GraphQLString },
-                email: { type: GraphQLString },
+                // firstName: { type: GraphQLString },
+                // lastName: { type: GraphQLString },
+                // email: { type: GraphQLString },
+                input: {
+                    type: StudentUpdateInput,
+                },
             },
             resolve(parent, args) {
                 return Student.findByIdAndUpdate(
                     args.id,
                     {
-                        firstName: args.firstName,
-                        lastName: args.lastName,
-                        email: args.email,
+                        firstName: args.input.firstName,
+                        lastName: args.input.lastName,
+                        email: args.input.email,
+                        gender: args.input.gender,
                     },
                     {
                         new: true,
