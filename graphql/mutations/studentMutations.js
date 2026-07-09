@@ -1,41 +1,15 @@
-const { GraphQLObjectType, GraphQLSchema } = require("graphql");
 const graphql = require("graphql");
-const Student = require("../models/student.model");
+const Student = require("../../models/student.model");
+const studentType = require("../types/studentType");
 
-const { GraphQLInt, GraphQLString, GraphQLID, GraphQLNonNull, GraphQLList } =
-    graphql;
-
-const studentType = new GraphQLObjectType({
-    name: "studentModel",
-    fields: {
-        id: { type: GraphQLID },
-        firstName: { type: GraphQLString },
-        lastName: { type: GraphQLString },
-        email: { type: GraphQLString },
-    },
-});
-
-const RootQuery = new GraphQLObjectType({
-    name: "RootQueryType",
-    fields: {
-        student: {
-            type: studentType,
-            args: {
-                id: { type: GraphQLID },
-            },
-            resolve(parent, args) {
-                console.log(args);
-                return Student.findById({ _id: args.id });
-            },
-        },
-        students: {
-            type: new GraphQLList(studentType),
-            resolve() {
-                return Student.find();
-            },
-        },
-    },
-});
+const {
+    GraphQLInt,
+    GraphQLString,
+    GraphQLID,
+    GraphQLNonNull,
+    GraphQLList,
+    GraphQLObjectType,
+} = graphql;
 
 const RootMutation = new GraphQLObjectType({
     name: "Mutation",
@@ -55,11 +29,11 @@ const RootMutation = new GraphQLObjectType({
                 })
                     .then((student) => {
                         console.log("Student created successfully");
-                        return student
+                        return student;
                     })
                     .catch((err) => {
                         console.log("Error", err);
-                        return err
+                        return err;
                     });
             },
         },
@@ -72,11 +46,11 @@ const RootMutation = new GraphQLObjectType({
                 return Student.findByIdAndDelete(args.id)
                     .then((student) => {
                         console.log("Student deleted", student);
-                        return student
+                        return student;
                     })
                     .catch((err) => {
                         console.log("Error deleting student", err);
-                        return err
+                        return err;
                     });
             },
         },
@@ -106,14 +80,11 @@ const RootMutation = new GraphQLObjectType({
                     })
                     .catch((err) => {
                         console.log("Error updating student", err);
-                        return err
+                        return err;
                     });
             },
         },
     },
 });
 
-module.exports = new GraphQLSchema({
-    query: RootQuery,
-    mutation: RootMutation,
-});
+module.exports = RootMutation;

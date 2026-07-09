@@ -19,7 +19,7 @@ mongoose
     });
 
 const graphqlHTTP = require("express-graphql").graphqlHTTP;
-const schema = require("./schema/schema");
+const schema = require("./graphql/schema");
 
 app.use(cors());
 app.use(
