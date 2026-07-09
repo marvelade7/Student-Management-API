@@ -55,9 +55,58 @@ const RootMutation = new GraphQLObjectType({
                 })
                     .then((student) => {
                         console.log("Student created successfully");
+                        return student
                     })
                     .catch((err) => {
                         console.log("Error", err);
+                        return err
+                    });
+            },
+        },
+        deleteStudent: {
+            type: studentType,
+            args: {
+                id: { type: GraphQLString },
+            },
+            resolve(parent, args) {
+                return Student.findByIdAndDelete(args.id)
+                    .then((student) => {
+                        console.log("Student deleted", student);
+                        return student
+                    })
+                    .catch((err) => {
+                        console.log("Error deleting student", err);
+                        return err
+                    });
+            },
+        },
+        updateStudent: {
+            type: studentType,
+            args: {
+                id: { type: GraphQLID },
+                firstName: { type: GraphQLString },
+                lastName: { type: GraphQLString },
+                email: { type: GraphQLString },
+            },
+            resolve(parent, args) {
+                return Student.findByIdAndUpdate(
+                    args.id,
+                    {
+                        firstName: args.firstName,
+                        lastName: args.lastName,
+                        email: args.email,
+                    },
+                    {
+                        new: true,
+                    },
+                )
+                    .then((student) => {
+                        console.log("Student updated successfully", student);
+                        return student;
+                    })
+                    .catch((err) => {
+                        console.log("Error updating student", err);
+                        return err
                     });
             },
         },
