@@ -1,6 +1,6 @@
 const graphql = require("graphql");
-const Student = require("../../models/student.model");
-const StudentType = require("../types/studentType");
+const Faculty = require("../../models/faculty.model");
+const FacultyType = require("../types/facultyType");
 
 const {
     GraphQLID,
@@ -8,22 +8,22 @@ const {
 } = graphql;
 
 module.exports = {
-    student: {
-        type: StudentType,
+    faculty: {
+        type: FacultyType,
         args: {
             id: {
                 type: GraphQLID,
             },
         },
         resolve(parent, args) {
-            return Student.findById(args.id);
+            return Faculty.findById(args.id);
         },
     },
 
-    students: {
-        type: new GraphQLList(StudentType),
+    faculties: {
+        type: new GraphQLList(FacultyType),
         resolve() {
-            return Student.find();
+            return Faculty.find();
         },
     },
 };
