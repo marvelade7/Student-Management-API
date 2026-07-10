@@ -1,68 +1,85 @@
-# Student Management API
+# 🎓 Student Management API
 
-A GraphQL-powered Student Management API built with **Node.js**, **Express.js**, **GraphQL**, and **MongoDB**. The project demonstrates modern GraphQL concepts such as queries, mutations, input types, validation, and MongoDB relationships while following a scalable project structure.
+A GraphQL-powered Student Management API built with **Node.js**, **Express.js**, **MongoDB**, and **Mongoose**.
 
-## Features
+This project demonstrates how to build a scalable GraphQL backend from scratch, covering CRUD operations, validation, relationships between collections, custom GraphQL types, and input types.
 
-### Student Management
+---
+
+## 🚀 Features
+
+### Students
 - Create a student
-- Update student details
+- Update student information
 - Delete a student
-- Get a student by ID
+- Get a single student
 - Get all students
 
-### GraphQL
-- GraphQL Queries
-- GraphQL Mutations
-- GraphQL Input Types
-- Custom Validation
-- Nested GraphQL Types (coming soon)
+### Departments
+- Create a department
+- Update department
+- Delete department
+- Get a department
+- Get all departments
 
-### Data Validation
+### Faculties
+- Create a faculty
+- Update faculty
+- Delete faculty
+- Get a faculty
+- Get all faculties
+
+### Relationships
+- Student belongs to a Department
+- Department belongs to a Faculty
+- Faculty has many Departments
+
+### Validation
 - Required field validation
 - Email format validation
 - Level validation
 - Age validation
 - Duplicate email check
 - Duplicate matric number check
-- Department existence validation
-
-### Database
-- MongoDB
-- Mongoose ODM
-- One-to-Many Relationships (Department → Students)
-
-### Seeder
-- Generates sample university data using Faker
-- Creates:
-  - 4 Faculties
-  - 12 Departments
-  - 300 Students
+- Department existence validation before creating a student
 
 ---
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 - Node.js
 - Express.js
 - GraphQL
-- express-graphql
 - MongoDB
 - Mongoose
-- Faker.js
-- Dotenv
+- GraphiQL
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
-```
+```text
 student-management-api/
 │
 ├── graphql/
 │   ├── mutations/
+│   │   ├── studentMutations.js
+│   │   ├── departmentMutations.js
+│   │   └── facultyMutations.js
+│   │
 │   ├── queries/
+│   │   ├── studentQueries.js
+│   │   ├── departmentQueries.js
+│   │   └── facultyQueries.js
+│   │
 │   ├── types/
+│   │   ├── studentType.js
+│   │   ├── departmentType.js
+│   │   ├── facultyType.js
+│   │   ├── studentInputType.js
+│   │   ├── departmentInputType.js
+│   │   └── facultyInputType.js
+│   │
 │   └── schema.js
 │
 ├── models/
@@ -70,27 +87,56 @@ student-management-api/
 │   ├── department.model.js
 │   └── faculty.model.js
 │
-├── seed/
-│   ├── faculties.js
-│   ├── departments.js
-│   └── seed.js
+├── config/
+│   └── db.js
 │
+├── seed.js
 ├── server.js
-├── package.json
-└── README.md
+├── .env
+└── package.json
 ```
 
 ---
 
-## Installation
+## 📊 Database Relationships
+
+```
+Faculty
+   │
+   ├──────────────┐
+   │              │
+Department     Department
+   │              │
+   │              │
+Student       Student
+```
+
+Example:
+
+```
+Faculty of Science
+        │
+        ├── Computer Science
+        │      ├── Cooper
+        │      ├── James
+        │      └── Sarah
+        │
+        └── Mathematics
+               ├── David
+               └── John
+```
+
+---
+
+## ⚙️ Installation
 
 Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/student-management-api.git
+git clone https://github.com/yourusername/student-management-api.git
 ```
 
-Move into the project directory
+Move into the project
 
 ```bash
 cd student-management-api
@@ -106,40 +152,47 @@ Create a `.env` file
 
 ```env
 PORT=5000
-MONGO_URI=your_mongodb_connection_string
+MONGODB_URI=your_mongodb_connection_string
 ```
 
 Start the server
 
 ```bash
-npm start
-```
-
-Or with Nodemon
-
-```bash
 npm run dev
 ```
 
----
+GraphQL Playground
 
-## Seed the Database
-
-Populate the database with sample data.
-
-```bash
-npm run seed
+```
+http://localhost:5000/graphql
 ```
 
-This creates:
+---
 
-- 4 Faculties
-- 12 Departments
-- 300 Students
+## Example Queries
+
+### Get all students
+
+```graphql
+query {
+  students {
+    id
+    firstName
+    lastName
+    email
+    department {
+      name
+      faculty {
+        name
+      }
+    }
+  }
+}
+```
 
 ---
 
-## Example Mutation
+### Create a Student
 
 ```graphql
 mutation {
@@ -150,85 +203,108 @@ mutation {
       email: "john@example.com"
       gender: "Male"
       age: 20
-      matricNumber: "CSC-2026-001"
       level: 300
-      department: "DEPARTMENT_ID"
+      matricNumber: "CSC-2026-001"
+      department: "departmentId"
     }
   ) {
     id
     firstName
     lastName
-    email
-    matricNumber
+    department {
+      name
+    }
   }
 }
 ```
 
 ---
 
-## Current Models
+### Create a Department
 
-### Student
-
-- firstName
-- lastName
-- email
-- gender
-- age
-- phoneNumber
-- matricNumber
-- department
-- level
-- cgpa
-- isActive
-
-### Department
-
-- name
-- faculty
-
-### Faculty
-
-- name
+```graphql
+mutation {
+  createDepartment(
+    input: {
+      name: "Computer Science"
+      faculty: "facultyId"
+    }
+  ) {
+    id
+    name
+  }
+}
+```
 
 ---
 
-## Roadmap
+### Create a Faculty
 
-- [x] GraphQL CRUD Operations
-- [x] GraphQL Input Types
-- [x] Custom Validation
+```graphql
+mutation {
+  createFaculty(
+    input: {
+      name: "Faculty of Science"
+    }
+  ) {
+    id
+    name
+  }
+}
+```
+
+---
+
+## Seed Database
+
+Populate the database with sample faculties, departments, and students.
+
+```bash
+node seed.js
+```
+
+---
+
+## Current Progress
+
+- [x] GraphQL Setup
+- [x] Student CRUD
+- [x] Department CRUD
+- [x] Faculty CRUD
 - [x] MongoDB Relationships
-- [x] Database Seeder
-- [ ] Nested GraphQL Resolvers
-- [ ] Authentication (JWT)
-- [ ] Authorization
-- [ ] Filtering
-- [ ] Sorting
-- [ ] Pagination
-- [ ] Search
-- [ ] GraphQL Context
-- [ ] Apollo Server Migration
-- [ ] Unit & Integration Testing
-- [ ] Docker Support
+- [x] Input Types
+- [x] Custom Object Types
+- [x] Validation
+- [x] Seed Script
 
 ---
 
-## Learning Goals
+## Upcoming Features
 
-This project is being built as a practical exploration of GraphQL and MongoDB, covering:
-
-- GraphQL Schema Design
-- Queries & Mutations
-- Input Types
-- Validation
-- MongoDB Relationships
-- Data Seeding
-- Authentication
+- Authentication (JWT)
+- Authorization (Roles)
 - Pagination
 - Filtering
-- Performance Optimization
-- Production-ready API Design
+- Searching
+- Sorting
+- GraphQL Enums
+- GraphQL Interfaces
+- GraphQL Unions
+- Custom Directives
+- DataLoader (N+1 Query Optimization)
+- Unit & Integration Tests
+- Docker Support
+- API Documentation
+- Deployment
+
+---
+
+## Author
+
+**Marvellous Adewuyi**
+
+- GitHub: https://github.com/marvelade7
+- LinkedIn: https://linkedin.com/in/marvellous-adewuyi-a32070278
 
 ---
 
