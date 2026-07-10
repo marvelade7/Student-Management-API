@@ -11,14 +11,6 @@ const StudentMutations = require("./mutations/studentMutations");
 const DepartmentMutations = require("./mutations/departmentMutations");
 const FacultyMutations = require("./mutations/facultyMutations");
 
-console.log("StudentQueries:", StudentQueries);
-console.log("DepartmentQueries:", DepartmentQueries);
-console.log("FacultyQueries:", FacultyQueries);
-
-console.log("StudentMutations:", StudentMutations);
-console.log("DepartmentMutations:", DepartmentMutations);
-console.log("FacultyMutations:", FacultyMutations);
-
 const RootQuery = new GraphQLObjectType({
     name: "RootQuery",
 

@@ -7,8 +7,7 @@ const {
     StudentUpdateInput,
 } = require("../types/studentInputType");
 const { GraphQLID } = graphql;
-console.log(StudentInputType);
-console.log(StudentUpdateInput);
+
 module.exports = {
     createStudent: {
         type: StudentType,

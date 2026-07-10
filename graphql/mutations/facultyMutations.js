@@ -6,8 +6,7 @@ const {
     FacultyUpdateInput,
 } = require("../types/facultyInputType");
 const { GraphQLID } = graphql;
-console.log(FacultyInputType);
-console.log(FacultyUpdateInput);
+
 module.exports = {
     createFaculty: {
         type: FacultyType,

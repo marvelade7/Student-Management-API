@@ -7,8 +7,7 @@ const {
     DepartmentUpdateInput,
 } = require("../types/departmentInputType");
 const { GraphQLID } = graphql;
-console.log(DepartmentInputType);
-console.log(DepartmentUpdateInput);
+
 module.exports = {
     createDepartment: {
         type: DepartmentType,
