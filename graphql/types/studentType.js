@@ -28,6 +28,7 @@ const studentType = new GraphQLObjectType({
         },
         level: { type: GraphQLInt },
         age: { type: GraphQLInt },
+        matricNumber: { type: GraphQLString },
     }),
 });
 
