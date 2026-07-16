@@ -25,6 +25,9 @@ const StudentPaginationType = new GraphQLObjectType({
         hasPreviousPage: {
             type: GraphQLBoolean,
         },
+        limit: {
+            type: GraphQLInt,
+        },
     }),
 });
 

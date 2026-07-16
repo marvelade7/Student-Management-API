@@ -73,6 +73,7 @@ module.exports = {
                             totalStudents,
                             hasNextPage: page < totalPages,
                             hasPreviousPage: page > 1,
+                            limit,
                         };
                     });
             });
@@ -158,6 +159,7 @@ module.exports = {
                         return {
                             students,
                             currentPage: page,
+                            limit,
                             totalPages,
                             totalStudents,
                             hasNextPage: page < totalPages,
