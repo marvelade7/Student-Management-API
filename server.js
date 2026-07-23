@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const path = require("path");
 
 const app = express();
 dotenv.config();
@@ -30,9 +31,7 @@ app.use(
     }),
 );
 
-app.get("/", (req, res) => {
-    res.send("Hello World");
-});
+app.use("/", express.static("docs"));
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
