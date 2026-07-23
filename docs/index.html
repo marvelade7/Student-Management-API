@@ -1,133 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Management API Documentation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="app-container">
-    <!-- Mobile Overlay -->
-    <div class="mobile-overlay" id="mobile-overlay"></div>
+    <div class="app-container">
+        <!-- Mobile Overlay -->
+        <div class="mobile-overlay" id="mobile-overlay"></div>
 
-    <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h2>🎓 Student API</h2>
-        </div>
-        
-        <div class="nav-group">
-            <div class="nav-group-title">Getting Started</div>
-            <ul class="nav-links">
-                <li><a href="#introduction" class="active">Introduction</a></li>
-            </ul>
-        </div>
-        
-        <div class="nav-group">
-            <div class="nav-group-title">Students</div>
-            <ul class="nav-links">
-                <li><a href="#create-student"><span class="method-badge method-post">POST</span> Create Student</a></li>
-                <li><a href="#get-students"><span class="method-badge method-post">POST</span> Get All Students</a></li>
-                <li><a href="#update-student"><span class="method-badge method-post">POST</span> Update Student</a></li>
-                <li><a href="#delete-student"><span class="method-badge method-post">POST</span> Delete Student</a></li>
-            </ul>
-        </div>
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>🎓 Student API</h2>
+            </div>
 
-        <div class="nav-group">
-            <div class="nav-group-title">Departments</div>
-            <ul class="nav-links">
-                <li><a href="#create-department"><span class="method-badge method-post">POST</span> Create Department</a></li>
-                <li><a href="#get-departments"><span class="method-badge method-post">POST</span> Get All Departments</a></li>
-            </ul>
-        </div>
+            <div class="nav-group">
+                <div class="nav-group-title">Getting Started</div>
+                <ul class="nav-links">
+                    <li><a href="#introduction" class="active">Introduction</a></li>
+                </ul>
+            </div>
 
-        <div class="nav-group">
-            <div class="nav-group-title">Faculties</div>
-            <ul class="nav-links">
-                <li><a href="#create-faculty"><span class="method-badge method-post">POST</span> Create Faculty</a></li>
-                <li><a href="#get-faculties"><span class="method-badge method-post">POST</span> Get All Faculties</a></li>
-            </ul>
-        </div>
+            <div class="nav-group">
+                <div class="nav-group-title">Students</div>
+                <ul class="nav-links">
+                    <li><a href="#create-student"><span class="method-badge method-post">POST</span> Create Student</a>
+                    </li>
+                    <li><a href="#get-students"><span class="method-badge method-post">POST</span> Get All Students</a>
+                    </li>
+                    <li><a href="#update-student"><span class="method-badge method-post">POST</span> Update Student</a>
+                    </li>
+                    <li><a href="#delete-student"><span class="method-badge method-post">POST</span> Delete Student</a>
+                    </li>
+                </ul>
+            </div>
 
-        <div class="sidebar-footer">
-            <button class="theme-toggle" id="theme-toggle">
-                <svg id="theme-icon-light" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
-                </svg>
-                <svg id="theme-icon-dark" style="display: none;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
-                </svg>
-                <span id="theme-text">Dark Mode</span>
-            </button>
-        </div>
-    </aside>
+            <div class="nav-group">
+                <div class="nav-group-title">Departments</div>
+                <ul class="nav-links">
+                    <li><a href="#create-department"><span class="method-badge method-post">POST</span> Create
+                            Department</a></li>
+                    <li><a href="#get-departments"><span class="method-badge method-post">POST</span> Get All
+                            Departments</a></li>
+                </ul>
+            </div>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        
-        <!-- Mobile Header -->
-        <div class="mobile-header">
-            <h2>🎓 Student API</h2>
-            <button class="mobile-menu-btn" id="mobile-menu-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                </svg>
-            </button>
-        </div>
+            <div class="nav-group">
+                <div class="nav-group-title">Faculties</div>
+                <ul class="nav-links">
+                    <li><a href="#create-faculty"><span class="method-badge method-post">POST</span> Create Faculty</a>
+                    </li>
+                    <li><a href="#get-faculties"><span class="method-badge method-post">POST</span> Get All
+                            Faculties</a></li>
+                </ul>
+            </div>
 
-        <div class="hero-section" id="introduction">
-            <h1>Student Management API</h1>
-            <p>Welcome to the Student Management GraphQL API documentation. This API allows you to manage students, departments, and faculties. <strong>All requests are made via HTTP POST to the <code>/graphql</code> endpoint.</strong></p>
-        </div>
+            <div class="sidebar-footer">
+                <button class="theme-toggle" id="theme-toggle">
+                    <svg id="theme-icon-light" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+                    </svg>
+                    <svg id="theme-icon-dark" style="display: none;" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+                    </svg>
+                    <span id="theme-text">Dark Mode</span>
+                </button>
+            </div>
+        </aside>
 
-        <!-- ==============================
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Mobile Header -->
+            <div class="mobile-header">
+                <h2>🎓 Student API</h2>
+                <button class="mobile-menu-btn" id="mobile-menu-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="hero-section" id="introduction">
+                <h1>Student Management API</h1>
+                <p>Welcome to the Student Management GraphQL API documentation. This API allows you to manage students, departments, and faculties.</p>
+                
+                <div class="highlight" style="margin-top: 1.5rem;">
+                    <p style="margin-bottom: 0.25rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--primary-color);">Live API Endpoint</p>
+                    <code style="font-size: 1.05rem; background: transparent; padding: 0; border: none; color: var(--text-primary); font-weight: 500;">https://student-management-api-v9qe.onrender.com/graphql</code>
+                </div>
+
+                <p style="margin-top: 1.5rem;"><strong>Note:</strong> All requests must be made via HTTP <strong>POST</strong> to the endpoint shown above.</p>
+            </div>
+
+            <!-- ==============================
              STUDENTS SECTION
         =============================== -->
 
-        <!-- Create Student -->
-        <section id="create-student" class="endpoint-section">
-            <div class="endpoint-info">
-                <h2>Create a Student</h2>
-                <p>Registers a new student onto the platform. Requires personal details, department ID, and a unique matriculation number.</p>
-                
-                <h3>Request Body Parameters</h3>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr><th>FIELD</th><th>TYPE</th><th>REQUIRED</th><th>DESCRIPTION</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td><code>firstName</code></td><td>string</td><td><span class="required-badge">YES</span></td><td>Student's first name</td></tr>
-                            <tr><td><code>lastName</code></td><td>string</td><td><span class="required-badge">YES</span></td><td>Student's last name</td></tr>
-                            <tr><td><code>email</code></td><td>string</td><td><span class="required-badge">YES</span></td><td>Valid unique email address</td></tr>
-                            <tr><td><code>gender</code></td><td>string</td><td><span class="required-badge">YES</span></td><td>Gender of the student</td></tr>
-                            <tr><td><code>department</code></td><td>string (ID)</td><td><span class="required-badge">YES</span></td><td>Valid Department Object ID</td></tr>
-                            <tr><td><code>level</code></td><td>int</td><td><span class="required-badge">YES</span></td><td>Current academic level (e.g., 100)</td></tr>
-                            <tr><td><code>age</code></td><td>int</td><td><span class="required-badge">YES</span></td><td>Age of the student</td></tr>
-                            <tr><td><code>matricNumber</code></td><td>string</td><td><span class="required-badge">YES</span></td><td>Unique matriculation number</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            
-            <div class="endpoint-code">
-                <div class="code-card">
-                    <div class="tabs">
-                        <button class="tab-btn active" data-target="req-create-student">Request</button>
-                        <button class="tab-btn" data-target="res-create-student">Response</button>
+            <!-- Create Student -->
+            <section id="create-student" class="endpoint-section">
+                <div class="endpoint-info">
+                    <h2>Create a Student</h2>
+                    <p>Registers a new student onto the platform. Requires personal details, department ID, and a unique
+                        matriculation number.</p>
+
+                    <h3>Request Body Parameters</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>FIELD</th>
+                                    <th>TYPE</th>
+                                    <th>REQUIRED</th>
+                                    <th>DESCRIPTION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>firstName</code></td>
+                                    <td>string</td>
+                                    <td><span class="required-badge">YES</span></td>
+                                    <td>Student's first name</td>
+                                </tr>
+                                <tr>
+                                    <td><code>lastName</code></td>
+                                    <td>string</td>
+                                    <td><span class="required-badge">YES</span></td>
+                                    <td>Student's last name</td>
+                                </tr>
+                                <tr>
+                                    <td><code>email</code></td>
+                                    <td>string</td>
+                                    <td><span class="required-badge">YES</span></td>
+                                    <td>Valid unique email address</td>
+                                </tr>
+                                <tr>
+                                    <td><code>gender</code></td>
+                                    <td>string</td>
+                                    <td><span class="required-badge">YES</span></td>
+                                    <td>Gender of the student</td>
+                                </tr>
+                                <tr>
+                                    <td><code>department</code></td>
+                                    <td>string (ID)</td>
+                                    <td><span class="required-badge">YES</span></td>
+                                    <td>Valid Department Object ID</td>
+                                </tr>
+                                <tr>
+                                    <td><code>level</code></td>
+                                    <td>int</td>
+                                    <td><span class="required-badge">YES</span></td>
+                                    <td>Current academic level (e.g., 100)</td>
+                                </tr>
+                                <tr>
+                                    <td><code>age</code></td>
+                                    <td>int</td>
+                                    <td><span class="required-badge">YES</span></td>
+                                    <td>Age of the student</td>
+                                </tr>
+                                <tr>
+                                    <td><code>matricNumber</code></td>
+                                    <td>string</td>
+                                    <td><span class="required-badge">YES</span></td>
+                                    <td>Unique matriculation number</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="tab-content active" id="req-create-student">
-<pre><code><span class="token-keyword">mutation</span> {
+                </div>
+
+                <div class="endpoint-code">
+                    <div class="code-card">
+                        <div class="tabs">
+                            <button class="tab-btn active" data-target="req-create-student">Request</button>
+                            <button class="tab-btn" data-target="res-create-student">Response</button>
+                        </div>
+                        <div class="tab-content active" id="req-create-student">
+                            <pre><code><span class="token-keyword">mutation</span> {
   createStudent(
     <span class="token-key">input</span>: {
       <span class="token-key">firstName</span>: <span class="token-string">"John"</span>
       <span class="token-key">lastName</span>: <span class="token-string">"Doe"</span>
-      <span class="token-key">email</span>: <span class="token-string">"john@example.com"</span>
+      <span class="token-key">email</span>: <span class="token-string">"[EMAIL_ADDRESS]"</span>
       <span class="token-key">gender</span>: <span class="token-string">"Male"</span>
-      <span class="token-key">department</span>: <span class="token-string">"64f1b2c3d..."</span>
+      <span class="token-key">department</span>: <span class="token-string">"69234accc8f3db7deaf59631"</span>
       <span class="token-key">level</span>: <span class="token-number">300</span>
       <span class="token-key">age</span>: <span class="token-number">20</span>
       <span class="token-key">matricNumber</span>: <span class="token-string">"CSC/2026/001"</span>
@@ -138,9 +209,9 @@
     lastName
   }
 }</code></pre>
-                    </div>
-                    <div class="tab-content" id="res-create-student">
-<pre><code>{
+                        </div>
+                        <div class="tab-content" id="res-create-student">
+                            <pre><code>{
   <span class="token-key">"data"</span>: {
     <span class="token-key">"createStudent"</span>: {
       <span class="token-key">"id"</span>: <span class="token-string">"64f2a1b9..."</span>,
@@ -149,29 +220,30 @@
     }
   }
 }</code></pre>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Get All Students -->
-        <section id="get-students" class="endpoint-section">
-            <div class="endpoint-info">
-                <h2>Get All Students</h2>
-                <p>Retrieves a list of all students in the database along with their associated department details.</p>
-                
-                <h3>Request Body Parameters</h3>
-                <p><em>No parameters required for this query.</em></p>
-            </div>
-            
-            <div class="endpoint-code">
-                <div class="code-card">
-                    <div class="tabs">
-                        <button class="tab-btn active" data-target="req-get-students">Request</button>
-                        <button class="tab-btn" data-target="res-get-students">Response</button>
-                    </div>
-                    <div class="tab-content active" id="req-get-students">
-<pre><code><span class="token-keyword">query</span> {
+            <!-- Get All Students -->
+            <section id="get-students" class="endpoint-section">
+                <div class="endpoint-info">
+                    <h2>Get All Students</h2>
+                    <p>Retrieves a list of all students in the database along with their associated department details.
+                    </p>
+
+                    <h3>Request Body Parameters</h3>
+                    <p><em>No parameters required for this query.</em></p>
+                </div>
+
+                <div class="endpoint-code">
+                    <div class="code-card">
+                        <div class="tabs">
+                            <button class="tab-btn active" data-target="req-get-students">Request</button>
+                            <button class="tab-btn" data-target="res-get-students">Response</button>
+                        </div>
+                        <div class="tab-content active" id="req-get-students">
+                            <pre><code><span class="token-keyword">query</span> {
   students {
     id
     firstName
@@ -181,9 +253,9 @@
     }
   }
 }</code></pre>
-                    </div>
-                    <div class="tab-content" id="res-get-students">
-<pre><code>{
+                        </div>
+                        <div class="tab-content" id="res-get-students">
+                            <pre><code>{
   <span class="token-key">"data"</span>: {
     <span class="token-key">"students"</span>: [
       {
@@ -197,41 +269,66 @@
     ]
   }
 }</code></pre>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Update Student -->
-        <section id="update-student" class="endpoint-section">
-            <div class="endpoint-info">
-                <h2>Update Student</h2>
-                <p>Updates an existing student's details. You only need to send the fields you wish to update.</p>
-                
-                <h3>Request Body Parameters</h3>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr><th>FIELD</th><th>TYPE</th><th>REQUIRED</th><th>DESCRIPTION</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td><code>id</code></td><td>string (ID)</td><td><span class="required-badge">YES</span></td><td>The ID of the student to update</td></tr>
-                            <tr><td><code>input</code></td><td>object</td><td><span class="required-badge">YES</span></td><td>Object containing the fields to update</td></tr>
-                            <tr><td><code>input.firstName</code></td><td>string</td><td>NO</td><td>Student's new first name</td></tr>
-                            <tr><td><code>input.level</code></td><td>int</td><td>NO</td><td>Student's new level</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            
-            <div class="endpoint-code">
-                <div class="code-card">
-                    <div class="tabs">
-                        <button class="tab-btn active" data-target="req-upd-student">Request</button>
-                        <button class="tab-btn" data-target="res-upd-student">Response</button>
+            <!-- Update Student -->
+            <section id="update-student" class="endpoint-section">
+                <div class="endpoint-info">
+                    <h2>Update Student</h2>
+                    <p>Updates an existing student's details. You only need to send the fields you wish to update.</p>
+
+                    <h3>Request Body Parameters</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>FIELD</th>
+                                    <th>TYPE</th>
+                                    <th>REQUIRED</th>
+                                    <th>DESCRIPTION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>id</code></td>
+                                    <td>string (ID)</td>
+                                    <td><span class="required-badge">YES</span></td>
+                                    <td>The ID of the student to update</td>
+                                </tr>
+                                <tr>
+                                    <td><code>input</code></td>
+                                    <td>object</td>
+                                    <td><span class="required-badge">YES</span></td>
+                                    <td>Object containing the fields to update</td>
+                                </tr>
+                                <tr>
+                                    <td><code>input.firstName</code></td>
+                                    <td>string</td>
+                                    <td>NO</td>
+                                    <td>Student's new first name</td>
+                                </tr>
+                                <tr>
+                                    <td><code>input.level</code></td>
+                                    <td>int</td>
+                                    <td>NO</td>
+                                    <td>Student's new level</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="tab-content active" id="req-upd-student">
-<pre><code><span class="token-keyword">mutation</span> {
+                </div>
+
+                <div class="endpoint-code">
+                    <div class="code-card">
+                        <div class="tabs">
+                            <button class="tab-btn active" data-target="req-upd-student">Request</button>
+                            <button class="tab-btn" data-target="res-upd-student">Response</button>
+                        </div>
+                        <div class="tab-content active" id="req-upd-student">
+                            <pre><code><span class="token-keyword">mutation</span> {
   updateStudent(
     <span class="token-key">id</span>: <span class="token-string">"64f2a1b9..."</span>,
     <span class="token-key">input</span>: {
@@ -243,9 +340,9 @@
     level
   }
 }</code></pre>
-                    </div>
-                    <div class="tab-content" id="res-upd-student">
-<pre><code>{
+                        </div>
+                        <div class="tab-content" id="res-upd-student">
+                            <pre><code>{
   <span class="token-key">"data"</span>: {
     <span class="token-key">"updateStudent"</span>: {
       <span class="token-key">"id"</span>: <span class="token-string">"64f2a1b9..."</span>,
@@ -254,46 +351,56 @@
     }
   }
 }</code></pre>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Delete Student -->
-        <section id="delete-student" class="endpoint-section">
-            <div class="endpoint-info">
-                <h2>Delete Student</h2>
-                <p>Removes a student from the database entirely.</p>
-                
-                <h3>Request Body Parameters</h3>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr><th>FIELD</th><th>TYPE</th><th>REQUIRED</th><th>DESCRIPTION</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td><code>id</code></td><td>string (ID)</td><td><span class="required-badge">YES</span></td><td>The ID of the student to delete</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            
-            <div class="endpoint-code">
-                <div class="code-card">
-                    <div class="tabs">
-                        <button class="tab-btn active" data-target="req-del-student">Request</button>
-                        <button class="tab-btn" data-target="res-del-student">Response</button>
+            <!-- Delete Student -->
+            <section id="delete-student" class="endpoint-section">
+                <div class="endpoint-info">
+                    <h2>Delete Student</h2>
+                    <p>Removes a student from the database entirely.</p>
+
+                    <h3>Request Body Parameters</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>FIELD</th>
+                                    <th>TYPE</th>
+                                    <th>REQUIRED</th>
+                                    <th>DESCRIPTION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>id</code></td>
+                                    <td>string (ID)</td>
+                                    <td><span class="required-badge">YES</span></td>
+                                    <td>The ID of the student to delete</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="tab-content active" id="req-del-student">
-<pre><code><span class="token-keyword">mutation</span> {
+                </div>
+
+                <div class="endpoint-code">
+                    <div class="code-card">
+                        <div class="tabs">
+                            <button class="tab-btn active" data-target="req-del-student">Request</button>
+                            <button class="tab-btn" data-target="res-del-student">Response</button>
+                        </div>
+                        <div class="tab-content active" id="req-del-student">
+                            <pre><code><span class="token-keyword">mutation</span> {
   deleteStudent(<span class="token-key">id</span>: <span class="token-string">"64f2a1b9..."</span>) {
     id
     firstName
   }
 }</code></pre>
-                    </div>
-                    <div class="tab-content" id="res-del-student">
-<pre><code>{
+                        </div>
+                        <div class="tab-content" id="res-del-student">
+                            <pre><code>{
   <span class="token-key">"data"</span>: {
     <span class="token-key">"deleteStudent"</span>: {
       <span class="token-key">"id"</span>: <span class="token-string">"64f2a1b9..."</span>,
@@ -301,43 +408,58 @@
     }
   }
 }</code></pre>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- ==============================
+            <!-- ==============================
              DEPARTMENTS SECTION
         =============================== -->
 
-        <!-- Create Department -->
-        <section id="create-department" class="endpoint-section">
-            <div class="endpoint-info">
-                <h2>Create Department</h2>
-                <p>Creates a new department under a specific faculty.</p>
-                
-                <h3>Request Body Parameters</h3>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr><th>FIELD</th><th>TYPE</th><th>REQUIRED</th><th>DESCRIPTION</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td><code>name</code></td><td>string</td><td><span class="required-badge">YES</span></td><td>Department name</td></tr>
-                            <tr><td><code>faculty</code></td><td>string (ID)</td><td><span class="required-badge">YES</span></td><td>Faculty ID this department belongs to</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            
-            <div class="endpoint-code">
-                <div class="code-card">
-                    <div class="tabs">
-                        <button class="tab-btn active" data-target="req-crt-dept">Request</button>
-                        <button class="tab-btn" data-target="res-crt-dept">Response</button>
+            <!-- Create Department -->
+            <section id="create-department" class="endpoint-section">
+                <div class="endpoint-info">
+                    <h2>Create Department</h2>
+                    <p>Creates a new department under a specific faculty.</p>
+
+                    <h3>Request Body Parameters</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>FIELD</th>
+                                    <th>TYPE</th>
+                                    <th>REQUIRED</th>
+                                    <th>DESCRIPTION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>name</code></td>
+                                    <td>string</td>
+                                    <td><span class="required-badge">YES</span></td>
+                                    <td>Department name</td>
+                                </tr>
+                                <tr>
+                                    <td><code>faculty</code></td>
+                                    <td>string (ID)</td>
+                                    <td><span class="required-badge">YES</span></td>
+                                    <td>Faculty ID this department belongs to</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="tab-content active" id="req-crt-dept">
-<pre><code><span class="token-keyword">mutation</span> {
+                </div>
+
+                <div class="endpoint-code">
+                    <div class="code-card">
+                        <div class="tabs">
+                            <button class="tab-btn active" data-target="req-crt-dept">Request</button>
+                            <button class="tab-btn" data-target="res-crt-dept">Response</button>
+                        </div>
+                        <div class="tab-content active" id="req-crt-dept">
+                            <pre><code><span class="token-keyword">mutation</span> {
   createDepartment(
     <span class="token-key">input</span>: {
       <span class="token-key">name</span>: <span class="token-string">"Computer Science"</span>
@@ -348,9 +470,9 @@
     name
   }
 }</code></pre>
-                    </div>
-                    <div class="tab-content" id="res-crt-dept">
-<pre><code>{
+                        </div>
+                        <div class="tab-content" id="res-crt-dept">
+                            <pre><code>{
   <span class="token-key">"data"</span>: {
     <span class="token-key">"createDepartment"</span>: {
       <span class="token-key">"id"</span>: <span class="token-string">"64f1b2c3d..."</span>,
@@ -358,26 +480,26 @@
     }
   }
 }</code></pre>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Get Departments -->
-        <section id="get-departments" class="endpoint-section">
-            <div class="endpoint-info">
-                <h2>Get All Departments</h2>
-                <p>Fetches all departments and their associated faculty.</p>
-            </div>
-            
-            <div class="endpoint-code">
-                <div class="code-card">
-                    <div class="tabs">
-                        <button class="tab-btn active" data-target="req-get-dept">Request</button>
-                        <button class="tab-btn" data-target="res-get-dept">Response</button>
-                    </div>
-                    <div class="tab-content active" id="req-get-dept">
-<pre><code><span class="token-keyword">query</span> {
+            <!-- Get Departments -->
+            <section id="get-departments" class="endpoint-section">
+                <div class="endpoint-info">
+                    <h2>Get All Departments</h2>
+                    <p>Fetches all departments and their associated faculty.</p>
+                </div>
+
+                <div class="endpoint-code">
+                    <div class="code-card">
+                        <div class="tabs">
+                            <button class="tab-btn active" data-target="req-get-dept">Request</button>
+                            <button class="tab-btn" data-target="res-get-dept">Response</button>
+                        </div>
+                        <div class="tab-content active" id="req-get-dept">
+                            <pre><code><span class="token-keyword">query</span> {
   departments {
     id
     name
@@ -386,9 +508,9 @@
     }
   }
 }</code></pre>
-                    </div>
-                    <div class="tab-content" id="res-get-dept">
-<pre><code>{
+                        </div>
+                        <div class="tab-content" id="res-get-dept">
+                            <pre><code>{
   <span class="token-key">"data"</span>: {
     <span class="token-key">"departments"</span>: [
       {
@@ -401,42 +523,52 @@
     ]
   }
 }</code></pre>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- ==============================
+            <!-- ==============================
              FACULTIES SECTION
         =============================== -->
-        
-        <!-- Create Faculty -->
-        <section id="create-faculty" class="endpoint-section">
-            <div class="endpoint-info">
-                <h2>Create Faculty</h2>
-                <p>Creates a new faculty which will serve as the parent to multiple departments.</p>
-                
-                <h3>Request Body Parameters</h3>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr><th>FIELD</th><th>TYPE</th><th>REQUIRED</th><th>DESCRIPTION</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td><code>name</code></td><td>string</td><td><span class="required-badge">YES</span></td><td>Faculty name</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            
-            <div class="endpoint-code">
-                <div class="code-card">
-                    <div class="tabs">
-                        <button class="tab-btn active" data-target="req-crt-fac">Request</button>
-                        <button class="tab-btn" data-target="res-crt-fac">Response</button>
+
+            <!-- Create Faculty -->
+            <section id="create-faculty" class="endpoint-section">
+                <div class="endpoint-info">
+                    <h2>Create Faculty</h2>
+                    <p>Creates a new faculty which will serve as the parent to multiple departments.</p>
+
+                    <h3>Request Body Parameters</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>FIELD</th>
+                                    <th>TYPE</th>
+                                    <th>REQUIRED</th>
+                                    <th>DESCRIPTION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>name</code></td>
+                                    <td>string</td>
+                                    <td><span class="required-badge">YES</span></td>
+                                    <td>Faculty name</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="tab-content active" id="req-crt-fac">
-<pre><code><span class="token-keyword">mutation</span> {
+                </div>
+
+                <div class="endpoint-code">
+                    <div class="code-card">
+                        <div class="tabs">
+                            <button class="tab-btn active" data-target="req-crt-fac">Request</button>
+                            <button class="tab-btn" data-target="res-crt-fac">Response</button>
+                        </div>
+                        <div class="tab-content active" id="req-crt-fac">
+                            <pre><code><span class="token-keyword">mutation</span> {
   createFaculty(
     <span class="token-key">input</span>: {
       <span class="token-key">name</span>: <span class="token-string">"Faculty of Science"</span>
@@ -446,9 +578,9 @@
     name
   }
 }</code></pre>
-                    </div>
-                    <div class="tab-content" id="res-crt-fac">
-<pre><code>{
+                        </div>
+                        <div class="tab-content" id="res-crt-fac">
+                            <pre><code>{
   <span class="token-key">"data"</span>: {
     <span class="token-key">"createFaculty"</span>: {
       <span class="token-key">"id"</span>: <span class="token-string">"64e9c1d..."</span>,
@@ -456,34 +588,34 @@
     }
   }
 }</code></pre>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Get Faculties -->
-        <section id="get-faculties" class="endpoint-section">
-            <div class="endpoint-info">
-                <h2>Get All Faculties</h2>
-                <p>Retrieves all faculties in the system.</p>
-            </div>
-            
-            <div class="endpoint-code">
-                <div class="code-card">
-                    <div class="tabs">
-                        <button class="tab-btn active" data-target="req-get-fac">Request</button>
-                        <button class="tab-btn" data-target="res-get-fac">Response</button>
-                    </div>
-                    <div class="tab-content active" id="req-get-fac">
-<pre><code><span class="token-keyword">query</span> {
+            <!-- Get Faculties -->
+            <section id="get-faculties" class="endpoint-section">
+                <div class="endpoint-info">
+                    <h2>Get All Faculties</h2>
+                    <p>Retrieves all faculties in the system.</p>
+                </div>
+
+                <div class="endpoint-code">
+                    <div class="code-card">
+                        <div class="tabs">
+                            <button class="tab-btn active" data-target="req-get-fac">Request</button>
+                            <button class="tab-btn" data-target="res-get-fac">Response</button>
+                        </div>
+                        <div class="tab-content active" id="req-get-fac">
+                            <pre><code><span class="token-keyword">query</span> {
   faculties {
     id
     name
   }
 }</code></pre>
-                    </div>
-                    <div class="tab-content" id="res-get-fac">
-<pre><code>{
+                        </div>
+                        <div class="tab-content" id="res-get-fac">
+                            <pre><code>{
   <span class="token-key">"data"</span>: {
     <span class="token-key">"faculties"</span>: [
       {
@@ -493,14 +625,15 @@
     ]
   }
 }</code></pre>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-    </main>
-</div>
+        </main>
+    </div>
 
-<script src="main.js"></script>
+    <script src="main.js"></script>
 </body>
+
 </html>
